@@ -18,8 +18,8 @@ matrix:
       os: osx
       compiler: clang
       script:
-        - wget -N https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
-        - unzip -T SFML-2.5.1-sources.zip
+        - wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
+        - unzip -n SFML-2.5.1-sources.zip
         - cd SFML-2.5.1
         - mkdir build
         - mkdir install
