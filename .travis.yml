@@ -18,8 +18,7 @@ matrix:
       os: osx
       compiler: clang
       script:
-        - if [ ! -d "SFML-2.5.1" ]
-          then
+        - if [ ! -d "SFML-2.5.1" ] ; then
           wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
           unzip SFML-2.5.1-sources.zip
           cd SFML-2.5.1
