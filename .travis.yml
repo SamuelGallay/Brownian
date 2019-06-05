@@ -18,18 +18,15 @@ matrix:
       os: osx
       compiler: clang
       script:
-        - |
-          if [ 'Bob' = 'Bob' ] ; then
-            wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
-            unzip SFML-2.5.1-sources.zip
-            cd SFML-2.5.1
-            mkdir build
-            mkdir install
-            cd build
-            cmake -DCMAKE_INSTALL_PREFIX=../install ..
-            make install
-            cd ../..
-          fi
+        - wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
+        - unzip -n SFML-2.5.1-sources.zip
+        - cd SFML-2.5.1
+        - mkdir build
+        - mkdir install
+        - cd build
+        - cmake -DCMAKE_INSTALL_PREFIX=../install ..
+        - sudo make install
+        - cd ../..
         - mkdir build && cd build
         - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
         - cmake --build .
