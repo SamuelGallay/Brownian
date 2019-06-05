@@ -21,8 +21,8 @@ matrix:
         - wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
         - unzip -n SFML-2.5.1-sources.zip
         - cd SFML-2.5.1
-        - mkdir build
-        - mkdir install
+        - mkdir -p build
+        - mkdir -p install
         - cd build
         - cmake -DCMAKE_INSTALL_PREFIX=../install ..
         - sudo make install
