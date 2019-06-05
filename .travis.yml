@@ -3,6 +3,7 @@ language: cpp
 addons:
   apt_packages:
     - libsfml-dev
+    - cmake
 
 script:
   - mkdir build && cd build
