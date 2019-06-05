@@ -1,14 +1,23 @@
 language: cpp
 
+os:
+  - linux
+  - osx
+
 script:
   - wget https://www.sfml-dev.org/files/SFML-2.5.1-linux-gcc-64-bit.tar.gz
+  - wget https://www.sfml-dev.org/files/SFML-2.5.1-macOS-clang.tar.gz
   - tar xzvf SFML-2.5.1-linux-gcc-64-bit.tar.gz
-  - pwd
-  - ls
+  - tar xzvf SFML-2.5.1-macOS-clang.tar.gz
   - mkdir build && cd build
-  - ls $HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML
-  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML .. ; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1-macos-clang/lib/cmake/SFML .. ; fi
   - cmake --build .
+
+
+#  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
+#  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1-macos-clang/lib/cmake/SFML ..
+
 
 matrix:
   include:
