@@ -33,4 +33,3 @@ matrix:
       cache:
         directories:
           - SFML-2.5.1
-          - SFML-2.5.1-sources.zip
