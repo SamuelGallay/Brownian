@@ -54,6 +54,7 @@ int main() {
                 velocity[i].y = abs(velocity[i].y);
             if (pos.y > window.getSize().y)
                 velocity[i].y = -abs(velocity[i].y);
+
             if (norme(pos - bigParticle.getPosition()) < bigParticle.getRadius()) {
                 bigSpeed += velocity[i] * 0.1f;
                 sf::Vector2f un = (pos - bigParticle.getPosition());
@@ -64,6 +65,7 @@ int main() {
                 float n = (velocity[i].x - t * ut.x) / un.x;
                 velocity[i] = -n * un + t * ut;
                 list[i].position += ((pos - bigParticle.getPosition()) * 0.5f);
+
             }
             list[i].position += (velocity[i] * dt);
         }
