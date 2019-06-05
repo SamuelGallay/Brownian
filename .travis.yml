@@ -7,7 +7,7 @@ script:
   - ls
   - mkdir build && cd build
   - ls $HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML
-  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1 ..
+  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
   - cmake --build .
 
 matrix:
