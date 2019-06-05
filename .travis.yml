@@ -33,3 +33,6 @@ matrix:
         - mkdir build && cd build
         - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
         - cmake --build .
+      cache:
+        directories:
+          - SFML-2.5.1
