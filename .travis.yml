@@ -1,14 +1,10 @@
 language: cpp
 
-addons:
-  apt_packages:
-    - cmake
-
 script:
   - wget https://www.sfml-dev.org/files/SFML-2.5.1-linux-gcc-64-bit.tar.gz
   - tar xzvf SFML-2.5.1-linux-gcc-64-bit.tar.gz
   - mkdir build && cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DSFML_DIR=../SFML-2.5.1
+  - cmake .. -DCMAKE_BUILD_TYPE=Release -DSFML_DIR=../SFML-2.5.1/lib/cmake/SFML
   - cmake --build .
 
 matrix:
