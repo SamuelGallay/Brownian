@@ -7,21 +7,19 @@ matrix:
       os: linux
       dist: xenial
       compiler: gcc
+      script:
+        - wget https://www.sfml-dev.org/files/SFML-2.5.1-linux-gcc-64-bit.tar.gz
+        - tar xzvf SFML-2.5.1-linux-gcc-64-bit.tar.gz
+        - mkdir build && cd build
+        - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
+        - cmake --build .
 
     - name: "macOS Clang Dynamic"
       os: osx
       compiler: clang
-
-script:
-  - wget https://www.sfml-dev.org/files/SFML-2.5.1-linux-gcc-64-bit.tar.gz
-  - wget https://www.sfml-dev.org/files/SFML-2.5.1-macOS-clang.tar.gz
-  - tar xzvf SFML-2.5.1-linux-gcc-64-bit.tar.gz
-  - tar xzvf SFML-2.5.1-macOS-clang.tar.gz
-  - mkdir build && cd build
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML .. ; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1-macos-clang/lib/cmake/SFML .. ; fi
-  - cmake --build .
-
-
-#  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
-#  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1-macos-clang/lib/cmake/SFML ..
+      script:
+        - wget https://www.sfml-dev.org/files/SFML-2.5.1-macOS-clang.tar.gz
+        - tar xzvf SFML-2.5.1-macOS-clang.tar.gz
+        - mkdir build && cd build
+#        - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
+#        - cmake --build .
