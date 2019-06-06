@@ -30,7 +30,7 @@ matrix:
     - name: windows-vs2017-dynamic
       os: windows
       env:
-        - CMAKE_FLAGS=-G "MinGW Makefiles"
+        - CMAKE_FLAGS="-G \"MinGW Makefiles\""
 
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
