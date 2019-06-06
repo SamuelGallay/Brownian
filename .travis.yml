@@ -24,6 +24,8 @@ matrix:
     - name: "macOS Clang Dynamic"
       os: osx
       compiler: clang
+      env:
+        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../install"
 
 script:
   - mkdir -p cache
@@ -36,7 +38,7 @@ script:
   - mkdir -p install
   - cd build
   - cmake .. $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install
-  - sudo cmake --build . --target install
+  - cmake --build . --target install
   - cd ../..
   - mkdir build && cd build
   - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/install/lib/cmake/SFML ..
