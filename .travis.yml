@@ -35,7 +35,7 @@ matrix:
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
   - mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
-  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install -G "MinGW Makefiles"
+  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install -G "MSYS Makefiles"
   - cmake --build . --target install
   - cd ..
 
