@@ -18,14 +18,17 @@ matrix:
       os: osx
       compiler: clang
       script:
-        - wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
-        - unzip -n SFML-2.5.1-sources.zip
+        - mkdir -p cache
+        - cd cache
+        - wget -N https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
+        - cd ..
+        - unzip -n cache/SFML-2.5.1-sources.zip
         - cd SFML-2.5.1
         - mkdir -p build
         - mkdir -p install
         - cd build
         - cmake -DCMAKE_INSTALL_PREFIX=../install ..
-        - sudo make install
+        - sudo cmake --build . --target install
         - cd ../..
         - mkdir build && cd build
         - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/install/lib/cmake/SFML ..
@@ -33,3 +36,4 @@ matrix:
       cache:
         directories:
           - SFML-2.5.1
+          - cache
