@@ -35,7 +35,7 @@ script:
   - mkdir -p build
   - mkdir -p install
   - cd build
-  - cmake -DCMAKE_INSTALL_PREFIX=../install ..
+  - cmake .. $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install
   - sudo cmake --build . --target install
   - cd ../..
   - mkdir build && cd build
