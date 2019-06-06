@@ -27,10 +27,8 @@ matrix:
       env:
         - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
 
-    - name: windows-vs2017-static
+    - name: windows-vs2017-dynamic
       os: windows
-      env:
-        - CMAKE_FLAGS="-DBUILD_SHARED_LIBS=FALSE -DSFML_STATIC_LIBRARIES=TRUE"
 
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
