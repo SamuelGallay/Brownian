@@ -29,19 +29,19 @@ matrix:
 
     - name: windows-vs2017-dynamic
       os: windows
-      env:
-        - CMAKE_FLAGS=-G\ \"MinGW\ Makefiles\"
+#      env:
+#        - CMAKE_FLAGS=-G\ \"MinGW\ Makefiles\"
 
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
   - mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
-  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install
+  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install -G "MinGW Makefiles"
   - cmake --build . --target install
   - cd ..
 
 script:
   - mkdir build && cd build
-  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
+  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML .. -G "MinGW Makefiles"
   - cmake --build .
   - cd ..
 
