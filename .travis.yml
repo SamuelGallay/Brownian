@@ -16,21 +16,21 @@ addons:
 matrix:
   include:
 
-    - name: linux-gcc-dynamic
-      os: linux
-      dist: xenial
-      compiler: gcc
+#    - name: linux-gcc-dynamic
+#      os: linux
+#      dist: xenial
+#      compiler: gcc
 
-    - name: macos-clang-dynamic
-      os: osx
-      compiler: clang
-      env:
-        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
+#    - name: macos-clang-dynamic
+#      os: osx
+#      compiler: clang
+#      env:
+#        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
 
     - name: windows-vs2017-dynamic
       os: windows
       env:
-        - CMAKE_FLAGS="-G \"MinGW Makefiles\""
+        - CMAKE_FLAGS='-G "MinGW Makefiles\"'
 
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
