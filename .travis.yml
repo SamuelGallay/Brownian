@@ -44,3 +44,6 @@ cache:
     - SFML-build
     - SFML-install
     - $HOME/SFML
+
+before_deploy:
+  - zip -r artifacts.zip SFML-build
