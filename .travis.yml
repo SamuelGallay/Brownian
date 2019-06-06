@@ -3,57 +3,57 @@ language: cpp
 addons:
   apt:
     packages:
-    - libfreetype6-dev
-    - libx11-dev
-    - libxrandr-dev
-    - libgl1-mesa-dev
-    - libudev-dev
-    - libopenal-dev
-    - libflac-dev
-    - libogg-dev
-    - libvorbis-dev
+      - libfreetype6-dev
+      - libx11-dev
+      - libxrandr-dev
+      - libgl1-mesa-dev
+      - libudev-dev
+      - libopenal-dev
+      - libflac-dev
+      - libogg-dev
+      - libvorbis-dev
 
 matrix:
   include:
 
-  - name: linux-gcc-dynamic
-    os: linux
-    dist: xenial
-    compiler: gcc
+    - name: linux-gcc-dynamic
+      os: linux
+      dist: xenial
+      compiler: gcc
 
-  - name: macos-clang-dynamic
-    os: osx
-    compiler: clang
-    env:
-    - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
+    - name: macos-clang-dynamic
+      os: osx
+      compiler: clang
+      env:
+        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
 
-  - name: windows-vs2017-static
-    os: windows
+    - name: windows-vs2017-static
+      os: windows
       env:
         - CMAKE_FLAGS="-DBUILD_SHARED_LIBS=FALSE -DSFML_STATIC_LIBRARIES=TRUE"
 
 before_script:
-- git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
-- mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
-- cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install
-- cmake --build . --target install
-- cd ..
+  - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
+  - mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
+  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install
+  - cmake --build . --target install
+  - cd ..
 
 script:
-- mkdir build && cd build
-- cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
-- cmake --build .
-- cd ..
+  - mkdir build && cd build
+  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
+  - cmake --build .
+  - cd ..
 
 cache:
   directories:
-  - SFML-build
-  - SFML-install
-  - "$HOME/SFML"
+    - SFML-build
+    - SFML-install
+    - "$HOME/SFML"
 
 before_deploy:
-- git clone https://github.com/SamuelGallay/BrownianMotion.git --branch gh-pages --single-branch gh-pages
-- zip -r gh-pages/$TRAVIS_JOB_NAME.zip SFML-build
+  - git clone https://github.com/SamuelGallay/BrownianMotion.git --branch gh-pages --single-branch gh-pages
+  - zip -r gh-pages/$TRAVIS_JOB_NAME.zip SFML-build
 
 deploy:
   provider: pages
