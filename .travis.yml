@@ -39,12 +39,12 @@ cache:
   - SFML-install
   - "$HOME/SFML"
 before_deploy:
-- zip -r artifacts.zip SFML-build
+- git clone https://github.com/SamuelGallay/BrownianMotion.git --branch gh-pages --single-branch gh-pages
+- zip -r gh-pages/artifacts.zip SFML-build
 deploy:
   provider: pages
-  local_dir: build
+  local_dir: gh-pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: false
   on:
     branch: master
