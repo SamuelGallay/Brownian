@@ -7,33 +7,29 @@ matrix:
       os: linux
       dist: xenial
       compiler: gcc
-      script:
-        - wget https://www.sfml-dev.org/files/SFML-2.5.1-linux-gcc-64-bit.tar.gz
-        - tar xzvf SFML-2.5.1-linux-gcc-64-bit.tar.gz
-        - mkdir build && cd build
-        - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/lib/cmake/SFML ..
-        - cmake --build .
 
     - name: "macOS Clang Dynamic"
       os: osx
       compiler: clang
-      script:
-        - mkdir -p cache
-        - cd cache
-        - wget -N https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
-        - cd ..
-        - unzip -n cache/SFML-2.5.1-sources.zip
-        - cd SFML-2.5.1
-        - mkdir -p build
-        - mkdir -p install
-        - cd build
-        - cmake -DCMAKE_INSTALL_PREFIX=../install ..
-        - sudo cmake --build . --target install
-        - cd ../..
-        - mkdir build && cd build
-        - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/install/lib/cmake/SFML ..
-        - cmake --build .
-      cache:
-        directories:
-          - SFML-2.5.1
-          - cache
+
+script:
+  - mkdir -p cache
+  - cd cache
+  - wget -N https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
+  - cd ..
+  - unzip -n cache/SFML-2.5.1-sources.zip
+  - cd SFML-2.5.1
+  - mkdir -p build
+  - mkdir -p install
+  - cd build
+  - cmake -DCMAKE_INSTALL_PREFIX=../install ..
+  - sudo cmake --build . --target install
+  - cd ../..
+  - mkdir build && cd build
+  - cmake -DSFML_DIR=$HOME/build/SamuelGallay/BrownianMotion/SFML-2.5.1/install/lib/cmake/SFML ..
+  - cmake --build .
+
+cache:
+  directories:
+    - SFML-2.5.1
+    - cache
