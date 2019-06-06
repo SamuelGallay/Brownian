@@ -28,8 +28,12 @@ matrix:
         - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../install"
 
 before_script:
-  - if cd SFML; then git pull && cd ..; else git clone https://github.com/SFML/SFML.git; fi
-  - ls SFML && cd SFML && mkdir -p build && mkdir -p install && cd build
+  - git clone https://github.com/SFML/SFML.git
+  - ls SFML
+  - cd SFML
+  - mkdir -p build
+  - mkdir -p install
+  - cd build
   - cmake .. $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install
   - cmake --build . --target install
   - cd ../..
@@ -41,4 +45,4 @@ script:
 
 cache:
   directories:
-    - SFML
+#    - SFML
