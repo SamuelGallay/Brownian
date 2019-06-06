@@ -40,9 +40,9 @@ before_script:
 
 script:
   - mkdir build && cd build
-  - cmake -DSFML_DIR=../SFML/install/lib/cmake/SFML ..
+  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML/install/lib/cmake/SFML ..
   - cmake --build .
 
-cache:
-  directories:
+#cache:
+#  directories:
 #    - SFML
