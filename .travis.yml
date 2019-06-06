@@ -41,9 +41,9 @@ cache:
 before_deploy:
 - zip -r artifacts.zip SFML-build
 deploy:
-  provider: releases
-  api_key:
-    secure: UoHrNuIApgoafFkCmNF0l0cxRV9186CjAhF9OZJZZK/kNUH9ZOeMewk/zWJ7CfWSGEb+th0Un0wrMRStAOGrCOGtwXn96PFQGrLYqFSHORIBnJW6Z+NPVVR4ecYMok5f6D2hpVjYrB2U5QrxOCMXhCOM04x8gB9J495CDffuPo4h0+lnoAGjBfuBRZouLMiLxKze+nbppyYKZCWcqyEh6FLcvZFurKl0wj3PqSpWfrcRilUpyPOZ1PMikPK6669fvhBq/QAK/PvJJzi7R4SQyCWayIA+YrJRrxpTWzxiJXJ21GYpNuuX6XNB7OUITRNMirqzpnlG5EejGGHDDe/1K1or+5QniemDgP14BUmB5d01eN8pQ2n6DBBv+5tMewaK+6Oifz1DwgYK7aABy1wuVqKAIy6ahdXdi64Ev9JZgQm5gvCMJVa+OreT5XJ+fjkIXZitXrCiYYJC6ZDIAAU4uhwpXOovAbtP2DByk8gn6Wm8hFyg07e5nZNJfDIPC5nz1nAwS4M3SdNHo2hyAuMjbgfL/fbxCp+2Zl54t9V2/JwGKZ4MC/0CqI2ri/4rAk6G70Qv+30/PHJIH1zyAjz+k3kcRRLm1iWWbjqMTx3r4W+feePTHIOHVk2vDZNHk5EBs0tQt/pMroiyKyAduepGBmXfZVgJrPt+fYIP4RN/zlc=
-  file: artifacts.zip
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
   on:
-    repo: SamuelGallay/BrownianMotion
+    branch: master
