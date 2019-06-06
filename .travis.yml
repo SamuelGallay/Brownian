@@ -1,49 +1,48 @@
 language: cpp
-
 addons:
   apt:
     packages:
-      - libfreetype6-dev
-      - libx11-dev
-      - libxrandr-dev
-      - libgl1-mesa-dev
-      - libudev-dev
-      - libopenal-dev
-      - libflac-dev
-      - libogg-dev
-      - libvorbis-dev
-
+    - libfreetype6-dev
+    - libx11-dev
+    - libxrandr-dev
+    - libgl1-mesa-dev
+    - libudev-dev
+    - libopenal-dev
+    - libflac-dev
+    - libogg-dev
+    - libvorbis-dev
 matrix:
   include:
-
-    - name: "Linux gcc Dynamic"
-      os: linux
-      dist: xenial
-      compiler: gcc
-
-    - name: "macOS Clang Dynamic"
-      os: osx
-      compiler: clang
-      env:
-        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
-
+  - name: Linux gcc Dynamic
+    os: linux
+    dist: xenial
+    compiler: gcc
+  - name: macOS Clang Dynamic
+    os: osx
+    compiler: clang
+    env:
+    - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
 before_script:
-  - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
-  - mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
-  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install
-  - cmake --build . --target install
-  - cd ..
-
+- git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
+- mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
+- cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install
+- cmake --build . --target install
+- cd ..
 script:
-  - mkdir build && cd build
-  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
-  - cmake --build .
-
+- mkdir build && cd build
+- cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
+- cmake --build .
 cache:
   directories:
-    - SFML-build
-    - SFML-install
-    - $HOME/SFML
-
+  - SFML-build
+  - SFML-install
+  - "$HOME/SFML"
 before_deploy:
-  - zip -r artifacts.zip SFML-build
+- zip -r artifacts.zip SFML-build
+deploy:
+  provider: releases
+  api_key:
+    secure: KCc9JgQNqUQlOdiTmUDzJMG6Y0bfrTRDNcJ3HVj4oJo3AtI3Em//DSmnkkcZp6ThtYoXbILORU/ioclQvan+0cFNTOmestRXuk0amOfHJbrO7lInU5bAH8GMSoV/mNdJ+fBKrVl1hrjQp9/O6megsgDe+uXPwTwkqC3UeQXN0baPDi7idOTvOlXfuE25H3Y2VymWRKFR+i0pQ5pUYR/PcTtlLpyQ/IC8RfJPlc/4VfVWTbPjNv7W97zxof2toxRbltLwN60Wlj5zNQIiIxdlX65OYeSa1+4Z/aFM9bqoQkuVUVvHJ8/XqFnxrqY5EQs8zTScZLQ75jlq4tEqy8zpQnDLGBbqcy2pSmyqUQ1KlDANCRccIPO6FoC6pvwMW4IcfTTLnyJrwseKzAfeyZICPL/14s/sE0O4MEaBxZVCxMfFkIVmN07yjCL7A+deu1uPUQ75vnJ42hWqPskC2c3PZAXYgnXTlID9ZH2ex71xA9NjrM+K5xv3EQLCzTYRL9MW9nnO3A2QzYJz/cyQ+RP+lqNJZkFWPYE/wlXBCxjeCdVy5oIG4KSIwelfnPtp/VV7WYqBGjeo9VRBJpbcfbUo/OnawnPoOvb3eDvgR6jhak7xdqV7bE3rLeMw/TkI9KssuRnd8uwNCJiWu0ZxOFQmvcWM4H1bLOFUX0iWoqCTu4M=
+  file: artifacts.zip
+  skip_cleanup: true
+  draft: true
