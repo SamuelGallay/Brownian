@@ -16,32 +16,27 @@ addons:
 matrix:
   include:
 
-#    - name: linux-gcc-dynamic
-#      os: linux
-#      dist: xenial
-#      compiler: gcc
+    - name: linux-gcc-dynamic
+      os: linux
+      dist: xenial
+      compiler: gcc
 
-#    - name: macos-clang-dynamic
-#      os: osx
-#      compiler: clang
-#      env:
-#        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
-
-    - name: windows-vs2017-dynamic
-      os: windows
-#      env:
-#        - CMAKE_FLAGS=-G\ \"MinGW\ Makefiles\"
+    - name: macos-clang-dynamic
+      os: osx
+      compiler: clang
+      env:
+        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
 
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
   - mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
-  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install -G "MSYS Makefiles"
+  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../SFML-install
   - cmake --build . --target install
   - cd ..
 
 script:
   - mkdir build && cd build
-  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML .. -G "MinGW Makefiles"
+  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
   - cmake --build .
   - cd ..
 
