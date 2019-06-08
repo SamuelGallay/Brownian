@@ -12,6 +12,7 @@ addons:
       - libflac-dev
       - libogg-dev
       - libvorbis-dev
+      - mingw-w64
 
 matrix:
   include:
@@ -26,6 +27,11 @@ matrix:
       compiler: clang
       env:
         - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install"
+
+    - name: linux-mingww64-dynamic
+        os: linux
+        dist: xenial
+        compiler: mingw-w64
 
 before_script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
