@@ -17,7 +17,7 @@ script:
   - mkdir -p SFML-build && mkdir -p SFML-install
   - cd SFML-build
   - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_EXAMPLES=TRUE
-  - cmake --build . --target install
+  - cmake --verbose --build . --target install
   - cd ..
 #  - mkdir build && cd build
 #  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
