@@ -15,8 +15,10 @@ addons:
 script:
   - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
   - mkdir -p SFML-build && mkdir -p SFML-install
-  - cmake -B SFML-build $HOME/SFML $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_EXAMPLES=TRUE
-  - cmake --build SFML-build --target install
+  - cd SFML-build
+  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_EXAMPLES=TRUE
+  - cmake --build . --target install
+  - cd ..
 #  - mkdir build && cd build
 #  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
 #  - cmake --build .
@@ -31,12 +33,12 @@ cache:
 matrix:
   include:
 
-    - name: "Linux gcc Dynamic"
-      os: linux
-      dist: xenial
-      compiler: gcc
-      env:
-        - CMAKE_FLAGS="-DSFML_BUILD_TEST_SUITE=TRUE"
+ #   - name: "Linux gcc Dynamic"
+ #     os: linux
+ #     dist: xenial
+ #     compiler: gcc
+ #     env:
+ #       - CMAKE_FLAGS="-DSFML_BUILD_TEST_SUITE=TRUE"
 
 #    - name: "Linux gcc Static"
 #      os: linux
@@ -59,11 +61,11 @@ matrix:
 #      env:
 #        - CMAKE_FLAGS="-DBUILD_SHARED_LIBS=FALSE -DSFML_BUILD_TEST_SUITE=TRUE"
 
-    - name: "macOS Xcode 10 Dynamic"
-      os: osx
-      osx_image: xcode10
-      env:
-        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_TEST_SUITE=TRUE"
+#   - name: "macOS Xcode 10 Dynamic"
+#      os: osx
+#      osx_image: xcode10
+#      env:
+#        - CMAKE_FLAGS="-DSFML_DEPENDENCIES_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_TEST_SUITE=TRUE"
 
 #    - name: "macOS Xcode 10 Frameworks"
 #      os: osx
