@@ -19,8 +19,10 @@ script:
   - rm -rf .git
   - ls -all
   - cd ..
-  - git clone https://github.com/SamuelGallay/SFML.git Brownian
-  - cd Brownian
+  - rm -rf Brownian
+  - git clone https://github.com/SamuelGallay/SFML.git SFML
+  - export TRAVIS_BUILD_DIR=/Users/travis/build/SamuelGallay/SFML
+  - cd SFML
   - mkdir build && cd build
   - cmake .. $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install -DSFML_BUILD_EXAMPLES=TRUE
   - cmake --build . --target install
