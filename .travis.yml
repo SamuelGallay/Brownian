@@ -13,8 +13,11 @@ addons:
     - libgl1-mesa-dev
 
 script:
-  - git clone https://github.com/SamuelGallay/SFML.git
-  - cd SFML
+  - ls -all
+  - rm -rf *
+  - cd ..
+  - git clone https://github.com/SamuelGallay/SFML.git Brownian
+  - cd Brownian
   - mkdir build && cd build
   - cmake .. $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install -DSFML_BUILD_EXAMPLES=TRUE
   - cmake --build . --target install
