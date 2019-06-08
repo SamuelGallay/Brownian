@@ -15,6 +15,7 @@ addons:
 script:
   - ls -all
   - rm -rf *
+  - ls -all
   - cd ..
   - git clone https://github.com/SamuelGallay/SFML.git Brownian
   - cd Brownian
