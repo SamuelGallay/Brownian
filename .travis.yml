@@ -15,6 +15,8 @@ addons:
 script:
   - ls -all
   - rm -rf *
+  - rm -f .travis.yml
+  - rm -rf .git
   - ls -all
   - cd ..
   - git clone https://github.com/SamuelGallay/SFML.git Brownian
