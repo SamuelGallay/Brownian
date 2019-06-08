@@ -12,18 +12,15 @@ addons:
     - clang
     - libgl1-mesa-dev
 
-before_script:
-  - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
-  - mkdir -p SFML-build && mkdir -p SFML-install && cd SFML-build
-  - cmake $HOME/SFML $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_EXAMPLES=TRUE
-  - cd ..
-  - cmake --build SFML-build --target install
-
 script:
-  - mkdir build && cd build
-  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
-  - cmake --build .
-  - cd ..
+  - git -C $HOME/SFML pull || git clone https://github.com/SFML/SFML.git $HOME/SFML
+  - mkdir -p SFML-build && mkdir -p SFML-install
+  - cmake -B SFML-build $HOME/SFML $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../SFML-install -DSFML_BUILD_EXAMPLES=TRUE
+  - cmake --build SFML-build --target install
+#  - mkdir build && cd build
+#  - cmake -DSFML_DIR=$TRAVIS_BUILD_DIR/SFML-install/lib/cmake/SFML ..
+#  - cmake --build .
+#  - cd ..
 
 cache:
   directories:
